@@ -226,7 +226,7 @@ angular
 
 		var models = {};
 		$scope.getModel = function(operation, obj, section) {
-			var id = operation.operationId + '-' + section;
+			var id = operation.httpMethod + ' ' + operation.path + '-' + section;
 			if (obj.schema && !models[id]) {
 				models[id] = $sce.trustAsHtml(swaggerModel.generateModel(openApiSpec, obj.schema, id));
 			}
@@ -235,7 +235,7 @@ angular
 
 		var samples = {};
 		$scope.getSample = function(operation, obj, section, contentType) {
-			var id = operation.operationId + '-' + section;
+			var id = operation.httpMethod + ' ' + operation.path + '-' + section;
 			samples[id] = samples[id] || {};
 			if (obj.schema && !samples[id][contentType]) {
 				samples[id][contentType] = swaggerModel[contentType.indexOf('/xml') >= 0 ? 'generateSampleXml' : 'generateSampleJson'](openApiSpec, obj.schema, obj.examples && obj.examples[contentType]);
