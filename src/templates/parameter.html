@@ -30,7 +30,6 @@
 	</div>
 </td>
 <td ng-class="{bold:param.required}" ng-bind-html="param.description" class="operation-parameter-description"></td>
-<td ng-bind="param.in" class="operation-parameter-in"></td>
 <td ng-if="param.type" ng-switch="param.type" class="operation-parameter-type">
 	<span ng-switch-when="array" ng-bind="'Array['+param.items.type+']'"></span>
 	<span ng-switch-default ng-bind="param.type"></span>
