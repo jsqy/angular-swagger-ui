@@ -20,6 +20,23 @@
     </div>
     <button ng-if="op.security.length>0" ng-click="auth(op)" class="auth-required" ng-class="{valid:authValid(op)}" title="{{'authRequired'|swaggerTranslate}}">!</button>
     <form role="form" name="explorerForm" ng-submit="explorerForm.$valid&&submitExplorer(op)">
+    	<div ng-if="op.parameters&&op.parameters.length>0" class="table-responsive">
+    		<h5 swagger-translate="parameters"></h5>
+    		<table class="table table-condensed parameters">
+    			<thead>
+    				<tr>
+    					<th class="name" swagger-translate="parameterName"></th>
+    					<th class="value" swagger-translate="parameterValue"></th>
+    					<th class="desc" swagger-translate="parameterDescription"></th>
+    					<th class="type" swagger-translate="parameterType"></th>
+    					<th class="data" swagger-translate="parameterDataType"></th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<tr ng-repeat="param in op.parameters track by $index" ng-include="'templates/parameter.html'" class="operation-parameter" ng-class="[param.css,'operation-parameter-'+param.in]"></tr>
+    			</tbody>
+    		</table>
+		</div>
     	<div ng-if="op.responseClass" class="response">
     		<h5 swagger-translate="responseClass" swagger-translate-value="op.responseClass"></h5>
     		<div ng-if="op.responseClass.display!=-1">
@@ -50,23 +67,6 @@
                 </tbody>
             </table>
         </div>
-    	<div ng-if="op.parameters&&op.parameters.length>0" class="table-responsive">
-    		<h5 swagger-translate="parameters"></h5>
-    		<table class="table table-condensed parameters">
-    			<thead>
-    				<tr>
-    					<th class="name" swagger-translate="parameterName"></th>
-    					<th class="value" swagger-translate="parameterValue"></th>
-    					<th class="desc" swagger-translate="parameterDescription"></th>
-    					<th class="type" swagger-translate="parameterType"></th>
-    					<th class="data" swagger-translate="parameterDataType"></th>
-    				</tr>
-    			</thead>
-    			<tbody>
-    				<tr ng-repeat="param in op.parameters track by $index" ng-include="'templates/parameter.html'" class="operation-parameter" ng-class="[param.css,'operation-parameter-'+param.in]"></tr>
-    			</tbody>
-    		</table>
-		</div>
         <div ng-if="op.produces" class="content-type">
             <label for="responseContentType{{op.id}}" swagger-translate="responseContentType"></label>
             <select ng-model="ui.form[op.id].responseType" ng-options="item for item in op.produces track by item" id="responseContentType{{op.id}}" name="responseContentType{{op.id}}" required></select>
