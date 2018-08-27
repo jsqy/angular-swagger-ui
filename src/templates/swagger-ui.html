@@ -2,6 +2,10 @@
 	<div class="api-name">
 		<h3 ng-bind="ui.infos.title"></h3>
 	</div>
+	<div class="api-version clearfix" ng-if="ui.infos">
+		[<span swagger-translate="infoBaseUrl"></span>: <span class="h4" ng-bind="ui.infos.basePath"></span>, <span swagger-translate="infoApiVersion"></span>: <span class="h4" ng-bind="ui.infos.version"></span>, <span swagger-translate="infoHost"></span>: <span class="h4" ng-bind="ui.infos.scheme"></span>://<span class="h4" ng-bind="ui.infos.host"></span>]
+		<a ng-if="validatorUrl!='false'" target="_blank" ng-href="{{validatorUrl}}/debug?url={{url}}"><img class="pull-right swagger-validator" ng-src="{{validatorUrl}}?url={{url}}"/></a>
+	</div>
 	<div ng-if="download!=null" class="download">
 		<a ng-href="{{url}}" target="_blank" swagger-translate="{{download.length==0?url:download}}"></a>
 	</div>
@@ -23,8 +27,4 @@
 	<ul class="list-unstyled endpoints">
 	    <li ng-repeat="api in ui.resources track by $index" class="endpoint" ng-class="{active:api.open}" ng-include="'templates/endpoint.html'"></li>
 	</ul>
-	<div class="api-version clearfix" ng-if="ui.infos">
-		[<span swagger-translate="infoBaseUrl"></span>: <span class="h4" ng-bind="ui.infos.basePath"></span>, <span swagger-translate="infoApiVersion"></span>: <span class="h4" ng-bind="ui.infos.version"></span>, <span swagger-translate="infoHost"></span>: <span class="h4" ng-bind="ui.infos.scheme"></span>://<span class="h4" ng-bind="ui.infos.host"></span>]
-		<a ng-if="validatorUrl!='false'" target="_blank" ng-href="{{validatorUrl}}/debug?url={{url}}"><img class="pull-right swagger-validator" ng-src="{{validatorUrl}}?url={{url}}"/></a>
-	</div>
 </div>
